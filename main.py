@@ -14,26 +14,8 @@ from kivy.uix.label import Label
 
 from kivy.core.window import Window
 
-# from kivy.lang import Builder
-#
-# from kivy.animation import Animation
-#
-# from kivy.config import ConfigParser
-#
-# from kivy.clock import Clock, _default_time
-#
-# from kivy.properties import ObjectProperty, DictProperty
-#
-# from libs.uix import customsettings
-# from libs.uix.dialogs import dialog
-# from libs.uix.startscreen import StartScreen
-#
-# from libs import programdata as data
-# from libs import programclass as _class
 
-
-# class MainScreen(Widget):
-#     pass
+Window.clearcolor = (1, 1, 1, 1)
 
 
 class AcquaiNoteApp(App):       # create subclass of a kivy class
@@ -42,7 +24,8 @@ class AcquaiNoteApp(App):       # create subclass of a kivy class
             text="AcquaiNote",
             font_size='20sp',
             bold=True,
-            italic=True
+            italic=True,
+            color="#6A5ACD"
         )
         return label
 
