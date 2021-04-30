@@ -7,7 +7,8 @@ class AcquaiNoteApp(App):       # create subclass of a kivy class
         return Button(
             text="Hello World!",
             pos=(50,50),
-            size=(100,100))      # the whole window will be a button
+            size=(500,500),
+            size_hint=(0.8,0.8))      # a button with a specific size
 
 
 if __name__ == '__main__':
