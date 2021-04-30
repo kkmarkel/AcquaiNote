@@ -6,12 +6,17 @@
         pos: 0, 0
         size: root.width, root.height
 
-        Button:
-            text: "Button 1"
-            pos_hint: {'x': 0.1, 'y': 0.1}
-            size_hint: 0.8, 0.1
+        GridLayout:
+            cols: 2
+            pos_hint: {'x': .3, 'y': .3}
+            size_hint: None, None
+            size: root.width * .4, root.width * .4       # we want a square, not a distorted rectangle
 
-        Button:
-            text: "Button 2"
-            pos_hint: {'x': 0.1, 'y': 0.6}
-            size_hint: 0.8, 0.1
+            Button:
+                text: "Button 1"
+            Button:
+                text: "Button 2"
+            Button:
+                text: "Button 3"
+            Button:
+                text: "Button 4"
