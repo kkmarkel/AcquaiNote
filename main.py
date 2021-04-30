@@ -2,13 +2,17 @@ from kivy.app import App
 from kivy.uix.button import Button
 
 
+class FunkyButton(Button):
+    pass
+
+
 class AcquaiNoteApp(App):       # create subclass of a kivy class
     def build(self):
-        return Button(
-            text="Hello World!",
-            pos=(50,50),
-            size=(500,500),
-            size_hint=(0.8,0.8))      # a button with a specific size
+        return FunkyButton(
+            text="hello world",
+            pos=(100, 100),
+            size_hint=(0.5, 0.5)
+        )
 
 
 if __name__ == '__main__':
