@@ -17,19 +17,28 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
 
 Window.clearcolor = (1, 1, 1, 1)
+Window.size = (360, 600)
 
 
 class AcquaiNoteApp(App):  # create subclass of a kivy class
     def build(self):
-        layout = BoxLayout()
-        btn = Button(
-            text="+"
+        layout = BoxLayout(
+            orientation='vertical',
+            spacing=100,
+            padding=80
         )
-        btn2 = Button(
-            text="Menu"
+        img = Image(
+            source='data/images/contact_image_b.png'
         )
-        layout.add_widget(btn)
-        layout.add_widget(btn2)
+        button = Button(
+            text="Login",
+            size_hint=(None, None),
+            width=180,
+            height=50,
+            pos_hint={'center_x': 0.5}
+        )
+        layout.add_widget(img)
+        layout.add_widget(button)
         return layout
 
 
