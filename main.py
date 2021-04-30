@@ -32,6 +32,8 @@ Window.size = (360, 600)
 username_helper = """
 MDTextField:
     hint_text: "Enter username"
+    icon_right: "account"
+    icon_right_color: app.theme_cls.primary_color
     size_hint: (300, None)
     width: 300
     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
