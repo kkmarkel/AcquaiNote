@@ -1,18 +1,15 @@
 from kivy.app import App
 from kivy.uix.button import Button
+from kivy.uix.widget import Widget
 
 
-class FunkyButton(Button):
+class MainScreen(Widget):
     pass
 
 
 class AcquaiNoteApp(App):       # create subclass of a kivy class
     def build(self):
-        return FunkyButton(
-            pos=(100, 100),
-            size_hint=(None, None),
-            size=(500, 500)
-        )
+        return MainScreen()
 
 
 if __name__ == '__main__':
