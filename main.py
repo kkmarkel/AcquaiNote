@@ -88,9 +88,11 @@ ScreenManager:
         
 <ProfileScreen>:
     name: 'profile_screen'
-    MDLabel:
-        text: "Welcome!"
-        halign: 'center'
+    MDIconButton:
+        icon: 'arrow-left'
+        icon_color: app.theme_cls.primary_color
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        on_press: root.manager.current = 'main_screen'
         
 """
 username_helper = """
