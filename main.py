@@ -5,7 +5,7 @@ import sys
 
 from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel, MDIcon
-from kivymd.uix.button import MDFloatingActionButton, MDFlatButton
+from kivymd.uix.button import MDFloatingActionButton, MDFlatButton, MDRectangleFlatButton, MDIconButton
 from kivymd.uix.screen import Screen
 from kivymd.font_definitions import theme_font_styles
 
@@ -13,7 +13,7 @@ from kivymd.font_definitions import theme_font_styles
 # from kivymd.navigationdrawer import NavigationDrawer
 
 # from kivy.uix.screenmanager import (ScreenManager, Screen, FadeTransition)
-from kivy.uix.button import Button
+
 from kivy.uix.widget import Widget
 
 from kivy.uix.image import Image, AsyncImage
@@ -28,7 +28,12 @@ Window.size = (360, 600)
 
 
 class AcquaiNoteApp(MDApp):  # create subclass of a kivy class
+
     def build(self):
+        self.theme_cls.primary_palette = "Indigo"
+        self.theme_cls.primary_hue = "500"
+        self.theme_cls.theme_style = "Light"
+        screen = Screen()
         layout = BoxLayout(
             orientation='vertical',
             spacing=10,
@@ -37,9 +42,10 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivy class
         label = MDLabel(
             text="AcquaiNote",
             theme_text_color='Custom',
-            text_color=(0.416, 0.353, 0.804, 1),
+            text_color=(0.4, 0.4, 0.8, 1),
             font_style='H4',
-            halign='center'
+            halign='center',
+            italic=True
         )
         img = Image(
             source='data/images/contact_image_b.png'
@@ -57,20 +63,22 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivy class
         )
         login_layout.add_widget(self.login_inpt)
         login_layout.add_widget(self.password_inpt)
-        login_btn = Button(
+
+        login_btn = MDRectangleFlatButton(
             text="Login",
             size_hint=(None, None),
             width=180,
             height=50,
-            pos_hint={'center_x': 0.5},
+            pos_hint={'center_x': 0.5, 'center_y': 0.5},
             on_press=self.login
         )
-        layout.add_widget(icon_label)
         layout.add_widget(label)
         layout.add_widget(img)
         layout.add_widget(login_layout)
         layout.add_widget(login_btn)
-        return layout
+
+        screen.add_widget(layout)
+        return screen
 
     def login(self, obj):
         print("login:" + self.login_inpt.text)
