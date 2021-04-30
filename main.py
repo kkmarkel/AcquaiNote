@@ -3,16 +3,16 @@ from kivy.uix.button import Button
 
 
 class FunkyButton(Button):
-    def __init__(self, **kwargs):
-        super(FunkyButton, self).__init__(**kwargs)
-        self.text = "hello world"
-        self.pos = (100, 100)
-        self.size_hint = (0.25, 0.25)
+    pass
 
 
 class AcquaiNoteApp(App):       # create subclass of a kivy class
     def build(self):
-        return FunkyButton()
+        return FunkyButton(
+            pos=(100, 100),
+            size_hint=(None, None),
+            size=(500, 500)
+        )
 
 
 if __name__ == '__main__':
