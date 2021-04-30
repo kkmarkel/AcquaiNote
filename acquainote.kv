@@ -3,5 +3,11 @@
 <FunkyButton>:
     canvas:
         Rectangle:
-            pos: self.x + 50, self.y + 50
+            pos: self.x + 50, self.y + 50       # we can use self because the parameters were assigned
             size: 100, 100
+
+    Button:
+        pos: root.x + 50, root.y + 50       # here we can't use self, only root to get from parent
+        size_hint: None, None
+        size: 200, 200
+        background_color: 1, 0, 0, 1
