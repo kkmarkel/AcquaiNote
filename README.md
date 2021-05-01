@@ -8,7 +8,7 @@ Make separate profiles for the people you meet, take notes about their names, co
 
 ## Usage
 
-AcquaiNote is built using kivy and kivymd python lybraries. Currently, he app can be run on Windows 10, but I plan to release the APK version for Android platform usage in the near future.
+AcquaiNote is built using kivy and kivymd python lybraries. Currently, the app can be run on Windows 10, but I plan to release the APK version for Android platform usage in the near future.
 
 ## Contributing
 The app is still in production!
