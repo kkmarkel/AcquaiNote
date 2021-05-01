@@ -1,10 +1,10 @@
 # AcquaiNote
 
-Tired of forgetting names and birthdays of your acquaintances, friends and family members? 
+Tired of forgetting the names and birthdays of your acquaintances, friends, and family members? 
 
 Then this app is for you!
 
-Make separate profiles for the people you meet, take notes about their names, connections, important dates, likes and dislikes.
+Make separate profiles for the people you meet, take notes about their names, connections, important dates, likes, and dislikes.
 
 ## Usage
 
