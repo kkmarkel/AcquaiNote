@@ -1,7 +1,7 @@
 #: kivy 2.0.0
 
-ScreenManager:
-    name: 'screenmanager'
+WindowManager:
+    name: 'screen_manager'
     LoginScreen:
     MainScreen:
     ProfileScreen:
@@ -29,14 +29,19 @@ ScreenManager:
             row_default_height: 40
 
             MDTextField:
-                hint_text: "Enter username"
-                icon_right: "account"
+                id: email
+                hint_text: "Enter Email Address"
+                icon_right: "email"
                 icon_right_color: app.theme_cls.primary_color
                 size_hint: (300, None)
                 width: 300
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
             MDTextField:
-                hint_text: "Enter password"
+                id: password
+                hint_text: "Enter Password"
+                icon_right: "lock"
+                icon_right_color: app.theme_cls.primary_color
+                password: True
                 size_hint: (300, None)
                 width: 300
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
@@ -48,14 +53,30 @@ ScreenManager:
             width: 180
             height: 50
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            on_press: root.manager.current = 'main_screen'
+            on_release:
+                app.login()
+                root.manager.transition.direction = "up"
+                app.root.current = 'main_screen'
+
+
+
 
 <MainScreen>:
     name: 'main_screen'
+
     MDFlatButton:
         text: 'Profile'
         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-        on_press: root.manager.current = 'profile_screen'
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = 'profile_screen'
+    MDFlatButton:
+        text: 'Exit'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = 'login_screen'
+
 
 <ProfileScreen>:
     name: 'profile_screen'
@@ -63,4 +84,8 @@ ScreenManager:
         icon: 'arrow-left'
         icon_color: app.theme_cls.primary_color
         pos_hint: {'center_x': 0.05, 'center_y': 0.95}
-        on_press: root.manager.current = 'main_screen'
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = 'main_screen'
+
+
