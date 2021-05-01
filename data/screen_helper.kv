@@ -31,7 +31,7 @@ WindowManager:
             MDTextField:
                 id: email
                 hint_text: "Enter Email Address"
-                icon_right: "account"
+                icon_right: "email"
                 icon_right_color: app.theme_cls.primary_color
                 size_hint: (300, None)
                 width: 300
@@ -39,6 +39,9 @@ WindowManager:
             MDTextField:
                 id: password
                 hint_text: "Enter Password"
+                icon_right: "lock"
+                icon_right_color: app.theme_cls.primary_color
+                password: True
                 size_hint: (300, None)
                 width: 300
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
@@ -51,7 +54,7 @@ WindowManager:
             height: 50
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
             on_release:
-                app.root.login()
+                app.login()
                 root.manager.transition.direction = "up"
                 app.root.current = 'main_screen'
 

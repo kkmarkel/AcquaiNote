@@ -45,7 +45,7 @@ class ProfileScreen(Screen):
 
 class WindowManager(ScreenManager):
     def login(self):
-       print("It works")
+        print("It works")
 
 
 class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
@@ -66,12 +66,29 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
         self.theme_cls.primary_hue = "500"
         self.theme_cls.theme_style = "Light"
         # end of theme declaration
-        
-        kv = Builder.load_file('data/screen_helper.kv')
-        return kv
 
-    def login(self, obj):
-        print("It works")
+        # loaded strings
+        self.configuration = Builder.load_file(
+            'data/screen_helper.kv')  # saving a reference to the loaded WindowManager
+        # end of loaded strings
+
+        # addition of loaded strings to screen + return screen
+        screen.add_widget(self.configuration)
+
+        return screen
+        # end of addition
+
+    # END OF BUILDER FUNCTION
+
+    # USER VALIDATION FUNCTION
+
+    def login(self):
+        email_addr = self.configuration.get_screen('login_screen').ids.email.text
+
+        if email_addr == str(''):
+            print("Invalid Email Address")
+
+    # END OF USER VALIDATION
 
     # def build(self):
     #     screen = Screen()
