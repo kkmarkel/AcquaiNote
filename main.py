@@ -43,6 +43,11 @@ class ProfileScreen(Screen):
     pass
 
 
+class WindowManager(ScreenManager):
+    def login(self):
+       print("It works")
+
+
 class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
     # sm = ScreenManager()
     # sm.add_widget(LoginScreen(name='login_screen'))
@@ -52,31 +57,38 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
     Window.size = (360, 640)
 
     def build(self):
-        screen = Screen()
-        self.theme_cls.primary_palette = "Indigo"
-        self.theme_cls.primary_hue = "500"
-        self.theme_cls.theme_style = "Light"
-        self.username_field = Builder.load_string(username_field_config)
-        login_button = MDRectangleFlatButton(
-            text="Login",
-            size_hint=(None, None),
-            width=180,
-            height=50,
-            pos_hint={'center_x': 0.5, 'center_y': 0.4},
-            on_press=self.login
-        )
-        screen.add_widget(self.username_field)
-        screen.add_widget(login_button)
-        return screen
+        kv = Builder.load_file('data/screen_helper.kv')
+        return kv
 
     def login(self, obj):
-        print(self.username_field.text)
+        print("It works")
 
-    #    print("username:" + self.username_fld.text)
-    #    print("password:" + self.password_fld.text)
-
-    def add_contact(self, obj):
-        pass
+    # def build(self):
+    #     screen = Screen()
+    #     self.theme_cls.primary_palette = "Indigo"
+    #     self.theme_cls.primary_hue = "500"
+    #     self.theme_cls.theme_style = "Light"
+    #     self.username_field = Builder.load_string(username_field_config)
+    #     login_button = MDRectangleFlatButton(
+    #         text="Login",
+    #         size_hint=(None, None),
+    #         width=180,
+    #         height=50,
+    #         pos_hint={'center_x': 0.5, 'center_y': 0.4},
+    #         on_press=self.login
+    #     )
+    #     screen.add_widget(self.username_field)
+    #     screen.add_widget(login_button)
+    #     return screen
+    #
+    # def login(self, obj):
+    #     print(self.username_field.text)
+    #
+    # #    print("username:" + self.username_fld.text)
+    # #    print("password:" + self.password_fld.text)
+    #
+    # def add_contact(self, obj):
+    #     pass
 
 
 if __name__ == '__main__':

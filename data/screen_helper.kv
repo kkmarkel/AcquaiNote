@@ -1,6 +1,6 @@
 #: kivy 2.0.0
 
-ScreenManager:
+WindowManager:
     name: 'screen_manager'
     LoginScreen:
     MainScreen:
@@ -29,6 +29,7 @@ ScreenManager:
             row_default_height: 40
 
             MDTextField:
+                id: username
                 hint_text: "Enter username"
                 icon_right: "account"
                 icon_right_color: app.theme_cls.primary_color
@@ -36,6 +37,7 @@ ScreenManager:
                 width: 300
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
             MDTextField:
+                id: password
                 hint_text: "Enter password"
                 size_hint: (300, None)
                 width: 300
@@ -48,16 +50,30 @@ ScreenManager:
             width: 180
             height: 50
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            on_press:
-                root.login();
-            on_release: root.manager.current = 'main_screen'
+            on_release:
+                app.root.login()
+                root.manager.transition.direction = "up"
+                app.root.current = 'main_screen'
+
+
+
 
 <MainScreen>:
     name: 'main_screen'
+
     MDFlatButton:
         text: 'Profile'
         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-        on_press: root.manager.current = 'profile_screen'
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = 'profile_screen'
+    MDFlatButton:
+        text: 'Exit'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = 'login_screen'
+
 
 <ProfileScreen>:
     name: 'profile_screen'
@@ -65,4 +81,8 @@ ScreenManager:
         icon: 'arrow-left'
         icon_color: app.theme_cls.primary_color
         pos_hint: {'center_x': 0.05, 'center_y': 0.95}
-        on_press: root.manager.current = 'main_screen'
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = 'main_screen'
+
+
