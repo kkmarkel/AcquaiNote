@@ -29,88 +29,6 @@ from kivy.lang import Builder
 Window.clearcolor = (1, 1, 1, 1)
 Window.size = (360, 600)
 
-screen_helper = """
-ScreenManager:
-    LoginScreen:
-    MainScreen:
-    ProfileScreen:
-    
-<LoginScreen>:
-    name: 'login_screen'
-    BoxLayout:
-        orientation: 'vertical'
-        spacing: 10
-        padding: 70
-        
-        MDLabel:
-            text: "AcquaiNote"
-            theme_text_color: 'Custom'
-            text_color: (0.4, 0.4, 0.8, 1)
-            font_style: 'H4'
-            halign: 'center'
-            italic: True
-        Image:
-            source: 'data/images/contact_image_b.png'
-            
-        GridLayout:
-            cols: 1
-            row_force_default: True
-            row_default_height: 40
-            
-            MDTextField:
-                hint_text: "Enter username"
-                icon_right: "account"
-                icon_right_color: app.theme_cls.primary_color
-                size_hint: (300, None)
-                width: 300
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            MDTextField:
-                hint_text: "Enter password"
-                size_hint: (300, None)
-                width: 300
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-
-
-        MDRectangleFlatButton:
-            text: "Login"
-            size_hint: (None, None)
-            width: 180
-            height: 50
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            on_press: root.manager.current = 'main_screen'
-            
-<MainScreen>:
-    name: 'main_screen'
-    MDFloatingActionButton:
-        text: 'Profile'
-        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-        on_press: root.manager.current = 'profile_screen'
-        
-<ProfileScreen>:
-    name: 'profile_screen'
-    MDIconButton:
-        icon: 'arrow-left'
-        icon_color: app.theme_cls.primary_color
-        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-        on_press: root.manager.current = 'main_screen'
-        
-"""
-username_helper = """
-MDTextField:
-    hint_text: "Enter username"
-    icon_right: "account"
-    icon_right_color: app.theme_cls.primary_color
-    size_hint: (300, None)
-    width: 300
-    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-"""
-password_helper = """
-MDTextField:
-    hint_text: "Enter password"
-    size_hint: (300, None)
-    width: 300
-    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-"""
 
 class LoginScreen(Screen):
     pass
@@ -133,7 +51,7 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
         self.theme_cls.primary_palette = "Indigo"
         self.theme_cls.primary_hue = "500"
         self.theme_cls.theme_style = "Light"
-        screen = Builder.load_string(screen_helper)
+        screen = Builder.load_file('data/screen_helper.kv')
             # layout = BoxLayout(
             #     orientation='vertical',
             #     spacing=10,
