@@ -56,7 +56,17 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
     Window.clearcolor = (1, 1, 1, 1)
     Window.size = (360, 640)
 
+    # BUILDER FUNCTION AND SCREEN
+
     def build(self):
+        screen = Screen()
+
+        # theme settings
+        self.theme_cls.primary_palette = "Indigo"
+        self.theme_cls.primary_hue = "500"
+        self.theme_cls.theme_style = "Light"
+        # end of theme declaration
+        
         kv = Builder.load_file('data/screen_helper.kv')
         return kv
 
@@ -65,9 +75,6 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
 
     # def build(self):
     #     screen = Screen()
-    #     self.theme_cls.primary_palette = "Indigo"
-    #     self.theme_cls.primary_hue = "500"
-    #     self.theme_cls.theme_style = "Light"
     #     self.username_field = Builder.load_string(username_field_config)
     #     login_button = MDRectangleFlatButton(
     #         text="Login",
