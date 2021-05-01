@@ -1,7 +1,7 @@
 #: kivy 2.0.0
 
 ScreenManager:
-    name: 'screenmanager'
+    name: 'screen_manager'
     LoginScreen:
     MainScreen:
     ProfileScreen:
@@ -48,7 +48,9 @@ ScreenManager:
             width: 180
             height: 50
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            on_press: root.manager.current = 'main_screen'
+            on_press:
+                root.login();
+            on_release: root.manager.current = 'main_screen'
 
 <MainScreen>:
     name: 'main_screen'
