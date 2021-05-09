@@ -40,19 +40,25 @@ ScreenManager:
                     MDToolbar:
                         title: 'AcquaiNote'
                         left_action_items: [['menu', lambda x: navigation.set_state('open')]]
-                        right_action_items: [['search', app.search_bar]]
+                        right_action_items: [['magnify', app.search_bar]]
                         elevation: 10
                     
                     ScrollView:
                         MDList:
-                            OneLineAvatarIconListItem:
-                                text: 'Friend 1'
+                            TwoLineAvatarIconListItem:
+                                text: 'Example entry'
                                 on_release: root.manager.current = 'profile_screen'
                                 ImageLeftWidget: 
                                     source: 'data\images\contact_image.png'
                                 IconRightWidget:    
                                     icon: 'dots-vertical'
-                                
+                    MDBottomAppBar:
+                        MDToolbar:
+                            id: 'main_bottom_toolbar'
+                            type: 'bottom'
+                            icon: 'plus'
+                            mode: 'end'
+                            on_action_button: root.manager.current = 'profile_screen'
                                 
         MDNavigationDrawer:
             id: navigation
@@ -65,12 +71,40 @@ ScreenManager:
                 ScrollView:
                     MDList:
                         OneLineIconListItem:
-                            text: 'Room'
+                            text: 'All'
+                            on_release: root.manager.current = 'home_screen'
+                            IconLeftWidget:
+                                icon: 'folder'
+                                on_release: root.manager.current = 'home_screen'
+
+                        OneLineIconListItem:
+                            text: 'Family'
                             on_release: root.manager.current = 'room_screen'
                             IconLeftWidget:
-                                icon: 'theater'
+                                icon: 'folder'
                                 on_release: root.manager.current = 'room_screen'
-                                
+                        
+                        OneLineIconListItem:
+                            text: 'Best Friends'
+                            on_release: root.manager.current = 'room_screen'
+                            IconLeftWidget:
+                                icon: 'folder'
+                                on_release: root.manager.current = 'room_screen'
+
+                        OneLineIconListItem:
+                            text: 'Work'
+                            on_release: root.manager.current = 'room_screen'
+                            IconLeftWidget:
+                                icon: 'folder'
+                                on_release: root.manager.current = 'room_screen'
+
+                        OneLineIconListItem:
+                            text: 'University'
+                            on_release: root.manager.current = 'room_screen'
+                            IconLeftWidget:
+                                icon: 'folder'
+                                on_release: root.manager.current = 'room_screen'
+
                         OneLineIconListItem:
                             text: 'Settings'
                             on_release: root.manager.current = 'settings_screen'
