@@ -33,7 +33,6 @@ from kivy.clock import Clock
 
 # from kivy.properties import ObjectProperty, StringProperty
 
-from data.builder import username_field_config
 
 
 # calling of screen classes and addition to the screen_manager
