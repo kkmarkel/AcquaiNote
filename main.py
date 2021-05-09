@@ -6,7 +6,7 @@ import sqlite3
 
 from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel, MDIcon
-from kivymd.uix.button import MDFloatingActionButton, MDFlatButton, MDRectangleFlatButton, MDIconButton
+from kivymd.uix.button import MDFloatingActionButton, MDFlatButton, MDRectangleFlatButton, MDIconButton, MDFillRoundFlatButton
 
 from kivymd.uix.textfield import MDTextField
 from kivymd.uix.list import MDList, OneLineListItem
@@ -31,7 +31,7 @@ from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.clock import Clock
 
-# from kivy.properties import ObjectProperty, StringProperty
+from kivy.properties import ObjectProperty, StringProperty
 
 
 
@@ -40,7 +40,7 @@ from kivy.clock import Clock
 class LoadingScreen(Screen):
     def __init__(self, **kwargs):
         super(LoadingScreen, self).__init__(**kwargs)
-        Clock.schedule_once(self.callNext, 7)
+        Clock.schedule_once(self.callNext, 5)
 
     def callNext(self, dt):
         self.manager.current = 'home_screen'
@@ -62,16 +62,18 @@ class ProfileScreen(Screen):
     pass
 
 
-# class ScreenManager(ScreenManager):
-#     pass
-#     # def login(self):
-#     #     print("It works")
+class NewEntryScreen(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
 
 manager = ScreenManager()
 manager.add_widget(HomeScreen(name='home_screen'))
 manager.add_widget(LoadingScreen(name='loading_screen'))
 manager.add_widget(RoomScreen(name='room_screen'))
 manager.add_widget(SettingsScreen(name='settings_screen'))
+manager.add_widget(ProfileScreen(name='profile_screen'))
+manager.add_widget(NewEntryScreen(name='new_entry_screen'))
 
 # end of call of screen classes and addition to screenmanager
 
@@ -138,7 +140,7 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
     # END OF USER VALIDATION
 
     def change(self, dt):
-        self.root.manager.current = 'home'
+        self.root.manager.current = 'home_screen'
 
     # App theme manager
     def change_theme(self):
@@ -170,30 +172,12 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
         )
         searchbar.open()
 
-    # def build(self):
-    #     screen = Screen()
-    #     self.username_field = Builder.load_string(username_field_config)
-    #     login_button = MDRectangleFlatButton(
-    #         text="Login",
-    #         size_hint=(None, None),
-    #         width=180,
-    #         height=50,
-    #         pos_hint={'center_x': 0.5, 'center_y': 0.4},
-    #         on_press=self.login
-    #     )
-    #     screen.add_widget(self.username_field)
-    #     screen.add_widget(login_button)
-    #     return screen
-    #
-    # def login(self, obj):
-    #     print(self.username_field.text)
-    #
-    # #    print("username:" + self.username_fld.text)
-    # #    print("password:" + self.password_fld.text)
-    #
-    # def add_contact(self, obj):
-    #     pass
-
+    def add_new_entry(self, *args):
+        print(HomeScreen(name='home_screen').ids)
+        HomeScreen(name='home_screen').ids.home_list.add_widget(OneLineListItem(text = 'Example entry'))       # this function will write down entries to the sqlite database
+        #   I don't understand why it doesn't generate new list item on the home screen...
+        #   Maybe the screen needs to be updated somehow?
+        #   Whatever, I think I will first save entries to the database and then make the whole list...
 
 # APP RUN
 if __name__ == '__main__':

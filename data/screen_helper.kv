@@ -7,6 +7,7 @@ ScreenManager:
     RoomScreen:
     SettingsScreen:
     ProfileScreen:
+    NewEntryScreen:
 
 
 <LoadingScreen>:
@@ -45,6 +46,7 @@ ScreenManager:
                     
                     ScrollView:
                         MDList:
+                            id: home_list
                             TwoLineAvatarIconListItem:
                                 text: 'Example entry'
                                 on_release: root.manager.current = 'profile_screen'
@@ -59,7 +61,7 @@ ScreenManager:
                             icon: 'plus-thick'
                             mode: 'end'
                             elevation: 10
-                            on_action_button: root.manager.current = 'profile_screen'
+                            on_action_button: root.manager.current = 'new_entry_screen'
                                 
         MDNavigationDrawer:
             id: navigation
@@ -147,17 +149,39 @@ ScreenManager:
     MDIconButton:
         icon: 'keyboard-backspace'
         pos_hint: {'center_x': 0.06, 'center_y': 0.96}
-        on_release: root.manager.current = 'home_screen'
+        on_release: 
+            root.manager.current = 'home_screen'
         size_hint: None, None
+
 
 <ProfileScreen>:
     name: 'profile_screen'
     MDIconButton:
+        icon: 'keyboard-backspace'
+        icon_color: app.theme_cls.primary_color
+        pos_hint: {'center_x': 0.06, 'center_y': 0.96}
+        on_release: 
+            root.manager.current = 'home_screen'
+
+
+<NewEntryScreen>:
+    name: 'new_entry_screen'
+    MDIconButton:
         icon: 'arrow-left'
         icon_color: app.theme_cls.primary_color
-        pos_hint: {'center_x': 0.05, 'center_y': 0.95}
+        pos_hint: {'center_x': 0.06, 'center_y': 0.96}
         on_release: 
-            root.manager.transition.direction = "right"
             root.manager.current = 'home_screen'
+
+    MDFillRoundFlatButton:
+        text: 'Add'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.06}
+        on_release: 
+            app.add_new_entry()
+            root.manager.current = 'home_screen'
+
+
+
+
 
 
