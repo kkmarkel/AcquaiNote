@@ -47,11 +47,12 @@ ScreenManager:
                         MDList:
                             OneLineAvatarIconListItem:
                                 text: 'Friend 1'
+                                on_release: root.manager.current = 'profile_screen'
                                 ImageLeftWidget: 
                                     source: 'data\images\contact_image.png'
                                 IconRightWidget:    
                                     icon: 'dots-vertical'
-                                    on_release: root.manager.current = 'profile_screen'
+                                
                                 
         MDNavigationDrawer:
             id: navigation
@@ -122,6 +123,6 @@ ScreenManager:
         pos_hint: {'center_x': 0.05, 'center_y': 0.95}
         on_release: 
             root.manager.transition.direction = "right"
-            app.root.current = 'home_screen'
+            root.manager.current = 'home_screen'
 
 
