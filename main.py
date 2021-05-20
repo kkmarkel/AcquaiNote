@@ -114,8 +114,8 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
         # theme settings
         self.theme_cls.primary_palette = "Indigo"
         self.theme_cls.primary_hue = "500"
-        self.theme_cls.theme_style = "Light"
-        # end of theme declaration
+        self.theme_cls.theme_style = self.config.get('Common settings', 'themesettings')
+        # end of theme settings
 
         # loaded strings
         configuration = Builder.load_file(
@@ -124,13 +124,17 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
 
         # addition of loaded strings to screen + return screen
         screen.add_widget(configuration)
+        # end of addition
 
-        self.settings_cls = SettingsWithSidebar
-        # self.use_kivy_settings = False
+        # settings of settings
+        # self.settings_cls = SettingsWithSidebar
+        self.use_kivy_settings = False
         # setting = self.config.get('example', 'boolexample')
 
+        # end of settings of settings
+
         return screen
-        # end of addition
+        
 
     # END OF BUILDER FUNCTION
 
@@ -196,18 +200,18 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
 
     # APP SETTINGS BUILDER
     def build_config(self, config):
-        config.setdefaults('example', {
-            'boolexample': True,
-            'numericexample': 10,
-            'optionsexample': 'option2',
-            'stringexample': 'some_string',
-            'pathexample': '/some/path'})
+        config.setdefaults('Common settings', {
+            'fontsizesettings': 15,
+            'themesettings': 'Light',
+            'pathsettings': '/some/path',
+            'languagesettings': 'English'})
 
     def build_settings(self, settings):
         settings.add_json_panel('Settings', self.config, data=settings_json)
 
     # this method is automatically called whenever a user changes the configuration
     def on_config_change(self, config, section, key, value):
+        self.theme_cls.theme_style = self.config.get('Common settings', 'themesettings')
         print(config, section, key, value)
 
 
