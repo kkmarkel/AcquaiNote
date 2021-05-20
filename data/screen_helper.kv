@@ -5,7 +5,6 @@ ScreenManager:
     LoadingScreen:
     HomeScreen:
     RoomScreen:
-    SettingsScreen:
     ProfileScreen:
     NewEntryScreen:
 
@@ -110,17 +109,10 @@ ScreenManager:
 
                         OneLineIconListItem:
                             text: 'Settings'
-                            on_release: root.manager.current = 'settings_screen'
+                            on_release: app.open_settings()
                             IconLeftWidget:
                                 icon: 'settings'
-                                on_release: root.manager.current = 'settings_screen'
-
-                        OneLineIconListItem:
-                            text: 'Theme Manager'
-                            on_release:
-                                app.change_theme()
-                            IconLeftWidget:
-                                icon: 'theme-light-dark'
+                                on_release: app.open_settings()
        
                     
 <RoomScreen>:
@@ -136,23 +128,6 @@ ScreenManager:
         pos_hint: {'center_x': 0.06, 'center_y': 0.96}
         on_release: root.manager.current = 'home_screen'
         size_hint: None, None
-
-
-<SettingsScreen>:
-    name: 'settings_screen'
-
-    MDLabel:
-        text: 'Welcome to the Settings Screen'
-        halign: 'center'
-        bold: True
-        font_size: 50
-    MDIconButton:
-        icon: 'keyboard-backspace'
-        pos_hint: {'center_x': 0.06, 'center_y': 0.96}
-        on_release: 
-            root.manager.current = 'home_screen'
-        size_hint: None, None
-
 
 <ProfileScreen>:
     name: 'profile_screen'

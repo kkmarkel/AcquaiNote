@@ -25,6 +25,8 @@ from kivy.uix.image import Image, AsyncImage
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
+from kivy.uix.settings import SettingsWithSidebar
+
 
 from kivy.core.window import Window
 
@@ -33,6 +35,7 @@ from kivy.clock import Clock
 
 from kivy.properties import ObjectProperty, StringProperty
 
+from data.settingsjson import settings_json
 
 
 # calling of screen classes and addition to the screen_manager
@@ -54,10 +57,6 @@ class RoomScreen(Screen):
     pass
 
 
-class SettingsScreen(Screen):
-    pass
-
-
 class ProfileScreen(Screen):
     pass
 
@@ -71,7 +70,6 @@ manager = ScreenManager()
 manager.add_widget(HomeScreen(name='home_screen'))
 manager.add_widget(LoadingScreen(name='loading_screen'))
 manager.add_widget(RoomScreen(name='room_screen'))
-manager.add_widget(SettingsScreen(name='settings_screen'))
 manager.add_widget(ProfileScreen(name='profile_screen'))
 manager.add_widget(NewEntryScreen(name='new_entry_screen'))
 
@@ -79,6 +77,8 @@ manager.add_widget(NewEntryScreen(name='new_entry_screen'))
 
 
 class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
+    Window.size = (360, 640)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
     # sm = ScreenManager()
@@ -86,22 +86,18 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
     # sm.add_widget(MainScreen(name='main_screen'))
     # sm.add_widget(ProfileScreen(name='profile_screen'))
     # Window.clearcolor = (1, 1, 1, 1)
-    Window.size = (360, 640)
 
     # -------------------------- CODE FOR THE DATABASE ---------------------------------- #
-    conn = sqlite3.connect('acquai_database.db')
-    cursor = conn.cursor()
+    # conn = sqlite3.connect('acquai_database.db')
+    # cursor = conn.cursor()
 
-    # cursor.execute('''CREATE TABLE users (
-    #                 email text,
-    #                 password integer
-    #                 )''')
+    # # cursor.execute('''CREATE TABLE users (
+    # #                 email text,
+    # #                 password integer
+    # #                 )''')
 
-    def sign_up(self, cursor):
-        cursor.execute('INSERT INTO users VALUES('', '')')
-
-    conn.commit()
-    conn.close()
+    # def sign_up(self, cursor):
+    #     cursor.execute('INSERT INTO users VALUES('', '')')
 
     # -------------------------- END OF CODE FOR THE DATABASE ---------------------------------- #
 
@@ -113,8 +109,8 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
         # theme settings
         self.theme_cls.primary_palette = "Indigo"
         self.theme_cls.primary_hue = "500"
-        self.theme_cls.theme_style = "Light"
-        # end of theme declaration
+        self.theme_cls.theme_style = self.config.get('Common settings', 'themesettings')
+        # end of theme settings
 
         # loaded strings
         configuration = Builder.load_file(
@@ -123,9 +119,17 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
 
         # addition of loaded strings to screen + return screen
         screen.add_widget(configuration)
+        # end of addition
+
+        # settings of settings
+        # self.settings_cls = SettingsWithSidebar
+        self.use_kivy_settings = False
+        # setting = self.config.get('example', 'boolexample')
+
+        # end of settings of settings
 
         return screen
-        # end of addition
+        
 
     # END OF BUILDER FUNCTION
 
@@ -173,12 +177,40 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
         searchbar.open()
 
     def add_new_entry(self, *args):
-        print(HomeScreen(name='home_screen').ids)
-        HomeScreen(name='home_screen').ids.home_list.add_widget(OneLineListItem(text = 'Example entry'))       # this function will write down entries to the sqlite database
-        #   I don't understand why it doesn't generate new list item on the home screen...
-        #   Maybe the screen needs to be updated somehow?
-        #   Whatever, I think I will first save entries to the database and then make the whole list...
+        conn = sqlite3.connect('acquai_database.db')
+        cursor = conn.cursor()
 
+        cursor.execute('''CREATE TABLE IF NOT EXISTS entry_list (id INTEGER PRIMARY KEY AUTOINCREMENT;
+                    email text,
+                    password integer
+                    )''')
+
+        conn.commit()
+        conn.close()
+        # print(HomeScreen(name='home_screen').ids)
+        # HomeScreen(name='home_screen').ids.home_list.add_widget(OneLineListItem(text = 'Example entry'))       # this function will write down entries to the sqlite database
+        # #   I don't understand why it doesn't generate new list item on the home screen...
+        # #   Maybe the screen needs to be updated somehow?
+        # #   Whatever, I think I will first save entries to the database and then make the whole list...
+
+    # APP SETTINGS BUILDER
+    def build_config(self, config):
+        config.setdefaults('Common settings', {
+            'fontsizesettings': 15,
+            'themesettings': 'Light',
+            'pathsettings': '/some/path',
+            'languagesettings': 'English'})
+
+    def build_settings(self, settings):
+        settings.add_json_panel('Settings', self.config, data=settings_json)
+
+    # this method is automatically called whenever a user changes the configuration
+    def on_config_change(self, config, section, key, value):
+        self.theme_cls.theme_style = self.config.get('Common settings', 'themesettings')
+        print(config, section, key, value)
+
+
+    # END OF APP SETTINGS BUILDER
 # APP RUN
 if __name__ == '__main__':
     AcquaiNoteApp().run()
