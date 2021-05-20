@@ -33,7 +33,7 @@ from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.clock import Clock
 
-from kivy.properties import ObjectProperty, StringProperty
+from kivy.properties import ObjectProperty, StringProperty, ListProperty
 
 from data.settingsjson import settings_json
 import data.lang as langfile
@@ -83,21 +83,6 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-    
-
-    # -------------------------- CODE FOR THE DATABASE ---------------------------------- #
-    # conn = sqlite3.connect('acquai_database.db')
-    # cursor = conn.cursor()
-
-    # # cursor.execute('''CREATE TABLE users (
-    # #                 email text,
-    # #                 password integer
-    # #                 )''')
-
-    # def sign_up(self, cursor):
-    #     cursor.execute('INSERT INTO users VALUES('', '')')
-
-    # -------------------------- END OF CODE FOR THE DATABASE ---------------------------------- #
 
     # BUILDER FUNCTION AND SCREEN
 
@@ -116,6 +101,9 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
         elif self.config.get('Common settings', 'languagesettings') == 'Русский':
             self.lang = 'ru'
 
+        # DATABASE
+        self.create_database()
+
         # loaded strings
         configuration = Builder.load_file(
             'data/screen_helper.kv')  # saving a reference to the loaded ScreenManager
@@ -126,10 +114,7 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
         # end of addition
 
         # settings of settings
-        # self.settings_cls = SettingsWithSidebar
         self.use_kivy_settings = False
-        # setting = self.config.get('example', 'boolexample')
-
         # end of settings of settings
 
         return screen
@@ -150,21 +135,8 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
     def change(self, dt):
         self.root.manager.current = 'home_screen'
 
-    # App theme manager
-    def change_theme(self):
-        if self.theme_cls.theme_style == "Light":
-            self.theme_cls.theme_style = "Dark"
-        elif self.theme_cls.theme_style == "Dark":
-            self.theme_cls.theme_style = "Light"
-        else:
-            pass
 
-        # theme_dialog = MDThemePicker()
-        # theme_dialog.open()       # почему-то не работает :(
-
-    # End of app theme manager
-
-    # home page search bar
+    # HOME PAGE SEARCH BAR
     def search_bar(self, dt):
         searchbar = Popup(
             title='Search',
@@ -179,23 +151,49 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
             pos_hint={'center_x': 0.5, 'center_y': 0.8}
         )
         searchbar.open()
+    # END OF HOME PAGE SEARCH BAR
 
-    def add_new_entry(self, *args):
+    # DATABASE OF ENTRIES
+    def create_database(self, *args):
         conn = sqlite3.connect('acquai_database.db')
         cursor = conn.cursor()
 
-        cursor.execute('''CREATE TABLE IF NOT EXISTS entry_list (id INTEGER PRIMARY KEY AUTOINCREMENT;
-                    email text,
-                    password integer
-                    )''')
+        cursor.execute('''CREATE TABLE IF NOT EXISTS entry_list(
+        ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        Name text NOT NULL,
+        Age integer);''')
 
         conn.commit()
         conn.close()
-        # print(HomeScreen(name='home_screen').ids)
-        # HomeScreen(name='home_screen').ids.home_list.add_widget(OneLineListItem(text = 'Example entry'))       # this function will write down entries to the sqlite database
-        # #   I don't understand why it doesn't generate new list item on the home screen...
-        # #   Maybe the screen needs to be updated somehow?
-        # #   Whatever, I think I will first save entries to the database and then make the whole list...
+
+    def add_entry(self, *args):
+        entry_name = NewEntryScreen(name='new_enrtry_screen').ids.entry_name.text
+        entry_age = NewEntryScreen(name='new_enrtry_screen').ids.entry_age.text
+
+        conn = sqlite3.connect('acquai_database.db')
+        cursor = conn.cursor()
+        try:
+            save_sql = "INSERT INTO entry_list (Name, Age) VALUES (?,?)"
+            cursor.execute(save_sql, (entry_name, entry_age))
+            conn.commit()
+            conn.close()
+            
+        except sqlite3.IntegrityError as e:
+            print("Error: ", e)
+
+
+    rows = ListProperty([("Name", "Age")])
+
+    def display_database(self, *args):
+
+        conn = sqlite3.connect('acquai_database.db')
+        cursor = conn.cursor()
+        cursor.execute('''SELECT Name, Age from entry_list''')
+        self.rows = cursor.fetchall()
+        conn.commit()
+        conn.close()
+
+    # END OF ENTRY DATABASE 
 
     # APP SETTINGS BUILDER
     def build_config(self, config):

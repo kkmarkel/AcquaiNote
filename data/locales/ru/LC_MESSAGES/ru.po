@@ -11,14 +11,48 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lang.kv:8
+#: lang.kv:1
 msgid "Settings"
 msgstr "Настройки"
 
-#: lang.kv:17
+#: lang.kv:2
 msgid "Russian"
 msgstr "Русский"
 
-#: lang.kv:21
-msgid "Английский"
-msgstr ""
+#: lang.kv:3
+msgid "Welcome to the Room Screen"
+msgstr "Добро пожаловать на отдельный экран"
+
+#: lang.kv:4
+msgid "Name"
+msgstr "Имя"
+
+#: lang.kv:5
+msgid "Age"
+msgstr "Возраст"
+
+#: lang.kv:6
+msgid "Add"
+msgstr "Добавить"
+
+#: lang.kv:7
+msgid "All"
+msgstr "Все"
+
+#: lang.kv:8
+msgid "Family"
+msgstr "Семья"
+
+#: lang.kv:9
+msgid "Best Friends"
+msgstr "Лучшие Друзья"
+
+#: lang.kv:10
+msgid "Work"
+msgstr "Работа"
+
+
+#: lang.kv:11
+msgid "University"
+msgstr "Университет"
+
