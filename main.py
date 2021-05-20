@@ -57,10 +57,6 @@ class RoomScreen(Screen):
     pass
 
 
-class SettingsScreen(Screen):
-    pass
-
-
 class ProfileScreen(Screen):
     pass
 
@@ -74,7 +70,6 @@ manager = ScreenManager()
 manager.add_widget(HomeScreen(name='home_screen'))
 manager.add_widget(LoadingScreen(name='loading_screen'))
 manager.add_widget(RoomScreen(name='room_screen'))
-manager.add_widget(SettingsScreen(name='settings_screen'))
 manager.add_widget(ProfileScreen(name='profile_screen'))
 manager.add_widget(NewEntryScreen(name='new_entry_screen'))
 
