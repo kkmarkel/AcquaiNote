@@ -1,4 +1,5 @@
 #:kivy 2.0.0
+#:import tr __main__.tr
 
 ScreenManager:
     name: 'screen_manager'
@@ -47,7 +48,7 @@ ScreenManager:
                         MDList:
                             id: home_list
                             TwoLineAvatarIconListItem:
-                                text: 'Example entry'
+                                text: tr._('Example entry')
                                 on_release: root.manager.current = 'profile_screen'
                                 ImageLeftWidget: 
                                     source: 'data\images\contact_image.png'
@@ -73,7 +74,7 @@ ScreenManager:
                 ScrollView:
                     MDList:
                         OneLineIconListItem:
-                            text: 'All'
+                            text: tr._('All')
                             on_release: root.manager.current = 'home_screen'
                             IconLeftWidget:
                                 icon: 'folder'
@@ -108,12 +109,18 @@ ScreenManager:
                                 on_release: root.manager.current = 'room_screen'
 
                         OneLineIconListItem:
-                            text: 'Settings'
+                            text: tr._('Settings')
                             on_release: app.open_settings()
                             IconLeftWidget:
                                 icon: 'settings'
                                 on_release: app.open_settings()
-       
+
+                        OneLineIconListItem:
+                            text: tr._('Russian')
+                            on_release: app.lang = 'ru'
+                            IconLeftWidget:
+                                icon: 'settings'
+                                on_release: app.lang = 'ru'
                     
 <RoomScreen>:
     name: 'room_screen'
@@ -147,6 +154,19 @@ ScreenManager:
         pos_hint: {'center_x': 0.06, 'center_y': 0.96}
         on_release: 
             root.manager.current = 'home_screen'
+
+    ScrollView:
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: '8dp'
+            padding: '8dp'  
+
+            MDTextField:
+                multiline: True
+                hint_text: "Multi-line text"
+            MDTextField:
+                multiline: True
+                hint_text: "Multi-line text"
 
     MDFillRoundFlatButton:
         text: 'Add'

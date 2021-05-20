@@ -36,6 +36,7 @@ from kivy.clock import Clock
 from kivy.properties import ObjectProperty, StringProperty
 
 from data.settingsjson import settings_json
+import data.lang as langfile
 
 
 # calling of screen classes and addition to the screen_manager
@@ -75,17 +76,14 @@ manager.add_widget(NewEntryScreen(name='new_entry_screen'))
 
 # end of call of screen classes and addition to screenmanager
 
+tr = langfile.Lang("en")
 
 class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
     Window.size = (360, 640)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-    # sm = ScreenManager()
-    # sm.add_widget(LoginScreen(name='login_screen'))
-    # sm.add_widget(MainScreen(name='main_screen'))
-    # sm.add_widget(ProfileScreen(name='profile_screen'))
-    # Window.clearcolor = (1, 1, 1, 1)
+    
 
     # -------------------------- CODE FOR THE DATABASE ---------------------------------- #
     # conn = sqlite3.connect('acquai_database.db')
@@ -211,6 +209,15 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
 
 
     # END OF APP SETTINGS BUILDER
+
+    # FUNCTIONS FOR LANGUAGE CHANGING
+    lang = StringProperty('en')
+
+    def on_lang(self, instance, lang):
+        tr.switch_lang(lang)
+
+    # END FUNCTIONS FOR LANGUAGE CHANGING
+
 # APP RUN
 if __name__ == '__main__':
     AcquaiNoteApp().run()
