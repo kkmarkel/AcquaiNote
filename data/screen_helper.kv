@@ -110,10 +110,10 @@ ScreenManager:
 
                         OneLineIconListItem:
                             text: 'Settings'
-                            on_release: root.manager.current = 'settings_screen'
+                            on_release: app.open_settings()
                             IconLeftWidget:
                                 icon: 'settings'
-                                on_release: root.manager.current = 'settings_screen'
+                                on_release: app.open_settings()
 
                         OneLineIconListItem:
                             text: 'Theme Manager'
