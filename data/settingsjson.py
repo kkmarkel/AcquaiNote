@@ -40,4 +40,4 @@ settings_json = json.dumps([
      'desc': 'Choose the language',
      'section': 'Common settings',
      'key': 'languagesettings',
-     'options': ['English', 'Russian']}])
+     'options': ['English', 'Русский']}])
