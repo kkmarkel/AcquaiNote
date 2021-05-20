@@ -123,7 +123,7 @@ ScreenManager:
         text: tr._('Welcome to the Room Screen')
         halign: 'center'
         bold: True
-        font_size: 50
+        font_size: 30
     MDIconButton:
         icon: 'keyboard-backspace'
         pos_hint: {'center_x': 0.06, 'center_y': 0.96}
@@ -149,24 +149,29 @@ ScreenManager:
         on_release: 
             root.manager.current = 'home_screen'
 
-    ScrollView:
-        BoxLayout:
-            orientation: 'vertical'
-            spacing: '8dp'
-            padding: '8dp'  
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+        padding: 80
 
-            MDTextField:
-                multiline: True
-                hint_text: "Multi-line text"
-            MDTextField:
-                multiline: True
-                hint_text: "Multi-line text"
+        ScrollView:
+            GridLayout:
+                cols: 1
+                MDTextField:
+                    id: entry_name
+                    mode: 'rectangle'
+                    hint_text: tr._("Name")
+                MDTextField:
+                    id: entry_age
+                    mode: 'rectangle'
+                    input_type: 'number'
+                    hint_text: tr._("Age")
 
     MDFillRoundFlatButton:
-        text: tr._('Add')
+        text: tr._("Add")
         pos_hint: {'center_x': 0.5, 'center_y': 0.06}
         on_release: 
-            app.add_new_entry()
+            app.add_entry()
             root.manager.current = 'home_screen'
 
 
