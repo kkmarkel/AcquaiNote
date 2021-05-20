@@ -110,6 +110,12 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
         self.theme_cls.theme_style = self.config.get('Common settings', 'themesettings')
         # end of theme settings
 
+        # LANGUAGE
+        if self.config.get('Common settings', 'languagesettings') == 'English':
+            self.lang = 'en'
+        elif self.config.get('Common settings', 'languagesettings') == 'Русский':
+            self.lang = 'ru'
+
         # loaded strings
         configuration = Builder.load_file(
             'data/screen_helper.kv')  # saving a reference to the loaded ScreenManager
@@ -205,6 +211,12 @@ class AcquaiNoteApp(MDApp):  # create subclass of a kivymd class
     # this method is automatically called whenever a user changes the configuration
     def on_config_change(self, config, section, key, value):
         self.theme_cls.theme_style = self.config.get('Common settings', 'themesettings')
+
+        if self.config.get('Common settings', 'languagesettings') == 'English':
+            self.lang = 'en'
+        elif self.config.get('Common settings', 'languagesettings') == 'Русский':
+            self.lang = 'ru'
+
         print(config, section, key, value)
 
 

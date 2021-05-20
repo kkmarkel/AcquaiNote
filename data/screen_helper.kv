@@ -81,28 +81,28 @@ ScreenManager:
                                 on_release: root.manager.current = 'home_screen'
 
                         OneLineIconListItem:
-                            text: 'Family'
+                            text: tr._('Family')
                             on_release: root.manager.current = 'room_screen'
                             IconLeftWidget:
                                 icon: 'folder'
                                 on_release: root.manager.current = 'room_screen'
                         
                         OneLineIconListItem:
-                            text: 'Best Friends'
+                            text: tr._('Best Friends')
                             on_release: root.manager.current = 'room_screen'
                             IconLeftWidget:
                                 icon: 'folder'
                                 on_release: root.manager.current = 'room_screen'
 
                         OneLineIconListItem:
-                            text: 'Work'
+                            text: tr._('Work')
                             on_release: root.manager.current = 'room_screen'
                             IconLeftWidget:
                                 icon: 'folder'
                                 on_release: root.manager.current = 'room_screen'
 
                         OneLineIconListItem:
-                            text: 'University'
+                            text: tr._('University')
                             on_release: root.manager.current = 'room_screen'
                             IconLeftWidget:
                                 icon: 'folder'
@@ -115,18 +115,12 @@ ScreenManager:
                                 icon: 'settings'
                                 on_release: app.open_settings()
 
-                        OneLineIconListItem:
-                            text: tr._('Russian')
-                            on_release: app.lang = 'ru'
-                            IconLeftWidget:
-                                icon: 'settings'
-                                on_release: app.lang = 'ru'
                     
 <RoomScreen>:
     name: 'room_screen'
 
     MDLabel:
-        text: 'Welcome to the Room Screen'
+        text: tr._('Welcome to the Room Screen')
         halign: 'center'
         bold: True
         font_size: 50
@@ -169,7 +163,7 @@ ScreenManager:
                 hint_text: "Multi-line text"
 
     MDFillRoundFlatButton:
-        text: 'Add'
+        text: tr._('Add')
         pos_hint: {'center_x': 0.5, 'center_y': 0.06}
         on_release: 
             app.add_new_entry()
